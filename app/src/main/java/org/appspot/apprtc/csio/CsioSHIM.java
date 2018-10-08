@@ -130,40 +130,40 @@ public class CsioSHIM {
     // PeerConnection related events
 
     @Subscribe
-    public void OnFabricSetup(CSIOEvents.OnFabricSetup fabricSetup) {
-        Logging.d(TAG, "OnFabricSetup ");
+    public void onFabricSetup(CSIOEvents.OnFabricSetup fabricSetup) {
+        Logging.d(TAG, "onFabricSetup ");
         if (callstats != null) {
             callstats.addNewFabric(fabricSetup.peerConnection, this.peerId);
         }
     }
 
     @Subscribe
-    public void OnIceConnectionChange(CSIOEvents.OnICEConnectionChange state) {
-        Logging.d(TAG, "OnIceConnectionChange " + state.state);
+    public void onIceConnectionChange(CSIOEvents.OnICEConnectionChange state) {
+        Logging.d(TAG, "onIceConnectionChange " + state.state);
         if (callstats != null) {
             callstats.reportEvent(peerId, new OnIceConnectionChange(state.state));
         }
     }
 
     @Subscribe
-    public void OnICEGatheringChanges(CSIOEvents.OnICEGatheringChanges state) {
-        Logging.d(TAG, "OnICEGatheringChanges " + state.state);
+    public void onICEGatheringChanges(CSIOEvents.OnICEGatheringChanges state) {
+        Logging.d(TAG, "onICEGatheringChanges " + state.state);
         if (callstats != null) {
             callstats.reportEvent(peerId, new OnIceGatheringChange(state.state));
         }
     }
 
     @Subscribe
-    public void OnICESignalingChange(CSIOEvents.OnICESignalingChange state) {
-        Logging.d(TAG, "OnICESignalingChange " + state.state);
+    public void onICESignalingChange(CSIOEvents.OnICESignalingChange state) {
+        Logging.d(TAG, "onICESignalingChange " + state.state);
         if (callstats != null) {
             callstats.reportEvent(peerId, new OnSignalingChange(state.state));
         }
     }
 
     @Subscribe
-    public void OnAddRemoveStream(CSIOEvents.OnAddRemoveStram stream) {
-        Logging.d(TAG, "OnAddRemoveStream " + stream.isAdded);
+    public void onAddRemoveStream(CSIOEvents.OnAddRemoveStram stream) {
+        Logging.d(TAG, "onAddRemoveStream " + stream.isAdded);
         if (callstats != null) {
             if (stream.isAdded) {
                 callstats.reportEvent(peerId, OnAddStream.INSTANCE);
@@ -174,40 +174,40 @@ public class CsioSHIM {
     }
 
     @Subscribe
-    public void OnMuteUnmutedAudio(CSIOEvents.OnMuteUnmuteAudio onMuteUnmuteAudio) {
-        Logging.d(TAG, "OnMuteUnmutedAudio " + onMuteUnmuteAudio.isMuted);
+    public void onMuteUnmutedAudio(CSIOEvents.OnMuteUnmuteAudio onMuteUnmuteAudio) {
+        Logging.d(TAG, "onMuteUnmutedAudio " + onMuteUnmuteAudio.isMuted);
         if (callstats != null) {
             callstats.reportEvent(peerId, new OnAudio(onMuteUnmuteAudio.isMuted, onMuteUnmuteAudio.deviceId));
         }
     }
 
     @Subscribe
-    public void OnVideoPlayPaused(CSIOEvents.OnVideoPlayPause onVideoPlayPause) {
-        Logging.d(TAG, "OnVideoPlayPaused " + onVideoPlayPause.isPaused);
+    public void onVideoPlayPaused(CSIOEvents.OnVideoPlayPause onVideoPlayPause) {
+        Logging.d(TAG, "onVideoPlayPaused " + onVideoPlayPause.isPaused);
         if (callstats != null) {
             callstats.reportEvent(peerId, new OnVideo(onVideoPlayPause.isPaused, onVideoPlayPause.deviceId));
         }
     }
 
     @Subscribe
-    public void OnResume(CSIOEvents.OnResume onResume) {
-        Logging.d(TAG, "OnResume ");
+    public void onResume(CSIOEvents.OnResume onResume) {
+        Logging.d(TAG, "onResume ");
         if (callstats != null) {
             callstats.reportEvent(peerId, OnResume.INSTANCE);
         }
     }
 
     @Subscribe
-    public void OnHold(CSIOEvents.OnHold onHold) {
-        Logging.d(TAG, "OnHold ");
+    public void onHold(CSIOEvents.OnHold onHold) {
+        Logging.d(TAG, "onHold ");
         if (callstats != null) {
             callstats.reportEvent(peerId, OnResume.INSTANCE);
         }
     }
 
     @Subscribe
-    public void OnLogs(CSIOEvents.OnLogs onLogs) {
-        Logging.d(TAG, "OnLogs ");
+    public void onLogs(CSIOEvents.OnLogs onLogs) {
+        Logging.d(TAG, "onLogs ");
         if (callstats != null) {
             callstats.log(onLogs.message, onLogs.level, LoggingType.TEXT);
         }
