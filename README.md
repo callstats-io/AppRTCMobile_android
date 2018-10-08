@@ -33,7 +33,7 @@ callstarts library related credentials to run the application.
 - Or Check your Callstats dashboard for given WebRTC sessions
 
 
-### Common events
+### Events implemented in demo
 - Look into ```CSIOEvents.java``` class for sample events integration in the demo application. Please note that not all the events mentioned in [https://docs.callstats.io/restapi/](https://docs.callstats.io/restapi/) is implemented. Check the library document for further reference.
 - Sample events covered in demo app :
     - [ x ] [Febric setup event ](https://docs.callstats.io/restapi/#tag/Fabric-Events)
