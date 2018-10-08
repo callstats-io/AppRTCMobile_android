@@ -15,5 +15,4 @@ Load static library for Key/Token generation
 static {
     Security.insertProviderAt(new BouncyCastleProvider(), 1);
 }
-
 ```
