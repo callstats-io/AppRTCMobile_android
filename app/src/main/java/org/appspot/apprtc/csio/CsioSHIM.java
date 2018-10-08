@@ -21,9 +21,17 @@ import java.util.Map;
 
 import io.callstats.Callstats;
 import io.callstats.CallstatsConfig;
+import io.callstats.LoggingLevel;
+import io.callstats.LoggingType;
+import io.callstats.OnAddStream;
+import io.callstats.OnAudio;
+import io.callstats.OnHold;
 import io.callstats.OnIceConnectionChange;
 import io.callstats.OnIceGatheringChange;
+import io.callstats.OnResume;
 import io.callstats.OnSignalingChange;
+import io.callstats.OnVideo;
+import io.callstats.PeerEvent;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -122,6 +130,14 @@ public class CsioSHIM {
     // PeerConnection related events
 
     @Subscribe
+    public void OnFabricSetup(CSIOEvents.OnFabricSetup fabricSetup) {
+        Logging.d(TAG, "OnFabricSetup ");
+        if (callstats != null) {
+            callstats.addNewFabric(fabricSetup.peerConnection, this.peerId);
+        }
+    }
+
+    @Subscribe
     public void OnIceConnectionChange(CSIOEvents.OnICEConnectionChange state) {
         Logging.d(TAG, "OnIceConnectionChange " + state.state);
         if (callstats != null) {
@@ -142,6 +158,58 @@ public class CsioSHIM {
         Logging.d(TAG, "OnICESignalingChange " + state.state);
         if (callstats != null) {
             callstats.reportEvent(peerId, new OnSignalingChange(state.state));
+        }
+    }
+
+    @Subscribe
+    public void OnAddRemoveStream(CSIOEvents.OnAddRemoveStram stream) {
+        Logging.d(TAG, "OnAddRemoveStream " + stream.isAdded);
+        if (callstats != null) {
+            if (stream.isAdded) {
+                callstats.reportEvent(peerId, OnAddStream.INSTANCE);
+            } else {
+                // not implemented
+            }
+        }
+    }
+
+    @Subscribe
+    public void OnMuteUnmutedAudio(CSIOEvents.OnMuteUnmuteAudio onMuteUnmuteAudio) {
+        Logging.d(TAG, "OnMuteUnmutedAudio " + onMuteUnmuteAudio.isMuted);
+        if (callstats != null) {
+            callstats.reportEvent(peerId, new OnAudio(onMuteUnmuteAudio.isMuted, onMuteUnmuteAudio.deviceId));
+        }
+    }
+
+    @Subscribe
+    public void OnVideoPlayPaused(CSIOEvents.OnVideoPlayPause onVideoPlayPause) {
+        Logging.d(TAG, "OnVideoPlayPaused " + onVideoPlayPause.isPaused);
+        if (callstats != null) {
+            callstats.reportEvent(peerId, new OnVideo(onVideoPlayPause.isPaused, onVideoPlayPause.deviceId));
+        }
+    }
+
+    @Subscribe
+    public void OnResume(CSIOEvents.OnResume onResume) {
+        Logging.d(TAG, "OnResume ");
+        if (callstats != null) {
+            callstats.reportEvent(peerId, OnResume.INSTANCE);
+        }
+    }
+
+    @Subscribe
+    public void OnHold(CSIOEvents.OnHold onHold) {
+        Logging.d(TAG, "OnHold ");
+        if (callstats != null) {
+            callstats.reportEvent(peerId, OnResume.INSTANCE);
+        }
+    }
+
+    @Subscribe
+    public void OnLogs(CSIOEvents.OnLogs onLogs) {
+        Logging.d(TAG, "OnLogs ");
+        if (callstats != null) {
+            callstats.log(onLogs.message, onLogs.level, LoggingType.TEXT);
         }
     }
 

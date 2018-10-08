@@ -49,6 +49,7 @@ import org.appspot.apprtc.AppRTCClient.RoomConnectionParameters;
 import org.appspot.apprtc.AppRTCClient.SignalingParameters;
 import org.appspot.apprtc.PeerConnectionClient.DataChannelParameters;
 import org.appspot.apprtc.PeerConnectionClient.PeerConnectionParameters;
+import org.appspot.apprtc.csio.CSIOEvents;
 import org.appspot.apprtc.csio.CsioSHIM;
 import org.greenrobot.eventbus.EventBus;
 import org.webrtc.Camera1Enumerator;
@@ -68,6 +69,8 @@ import org.webrtc.VideoCapturer;
 import org.webrtc.VideoFileRenderer;
 import org.webrtc.VideoFrame;
 import org.webrtc.VideoSink;
+
+import io.callstats.LoggingLevel;
 
 /**
  * Activity for peer connection call setup, call waiting
@@ -513,6 +516,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     @Override
     public void onStop() {
         super.onStop();
+        EventBus.getDefault().post(new CSIOEvents.OnLogs("onstop", LoggingLevel.INFO));
         activityRunning = false;
         // Don't stop the video when using screencapture to allow user to show other apps to the remote
         // end.
@@ -527,6 +531,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     @Override
     public void onStart() {
         super.onStart();
+        EventBus.getDefault().post(new CSIOEvents.OnLogs("onStart", LoggingLevel.INFO));
         activityRunning = true;
         // Video is not paused for screencapture. See onPause.
         if (peerConnectionClient != null && !screencaptureEnabled) {
@@ -559,6 +564,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
     @Override
     public void onCameraSwitch() {
+        EventBus.getDefault().post(new CSIOEvents.OnLogs("onCameraSwitch", LoggingLevel.INFO));
         if (peerConnectionClient != null) {
             peerConnectionClient.switchCamera();
         }
@@ -566,11 +572,13 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
     @Override
     public void onVideoScalingSwitch(ScalingType scalingType) {
+        EventBus.getDefault().post(new CSIOEvents.OnLogs("onVideoScalingSwitch", LoggingLevel.INFO));
         fullscreenRenderer.setScalingType(scalingType);
     }
 
     @Override
     public void onCaptureFormatChange(int width, int height, int framerate) {
+        EventBus.getDefault().post(new CSIOEvents.OnLogs("onCaptureFormatChange", LoggingLevel.INFO));
         if (peerConnectionClient != null) {
             peerConnectionClient.changeCaptureFormat(width, height, framerate);
         }
@@ -605,6 +613,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     }
 
     private void startCall() {
+        EventBus.getDefault().post(new CSIOEvents.OnLogs("startCalling", LoggingLevel.INFO));
         if (appRtcClient == null) {
             Log.e(TAG, "AppRTC client is not allocated for a call.");
             return;
@@ -634,6 +643,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
     // Should be called from UI thread
     private void callConnected() {
+        EventBus.getDefault().post(new CSIOEvents.OnLogs("callConnected", LoggingLevel.INFO));
         final long delta = System.currentTimeMillis() - callStartedTimeMs;
         Log.i(TAG, "Call connected: delay=" + delta + "ms");
         if (peerConnectionClient == null || isError) {
@@ -715,6 +725,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
     // Log |msg| and Toast about it.
     private void logAndToast(String msg) {
+        EventBus.getDefault().post(new CSIOEvents.OnLogs(msg, LoggingLevel.INFO));
         Log.d(TAG, msg);
         if (logToast != null) {
             logToast.cancel();
@@ -815,6 +826,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
     @Override
     public void onConnectedToRoom(final SignalingParameters params) {
+        EventBus.getDefault().post(new CSIOEvents.OnLogs("onConnectedToRoom", LoggingLevel.INFO));
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -825,6 +837,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
     @Override
     public void onRemoteDescription(final SessionDescription sdp) {
+        EventBus.getDefault().post(new CSIOEvents.OnLogs("have remote description", LoggingLevel.INFO));
         final long delta = System.currentTimeMillis() - callStartedTimeMs;
         runOnUiThread(new Runnable() {
             @Override
@@ -895,6 +908,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     // are routed to UI thread.
     @Override
     public void onLocalDescription(final SessionDescription sdp) {
+        EventBus.getDefault().post(new CSIOEvents.OnLogs("have local description", LoggingLevel.INFO));
         final long delta = System.currentTimeMillis() - callStartedTimeMs;
         runOnUiThread(new Runnable() {
             @Override
