@@ -201,7 +201,7 @@ public class CsioSHIM {
     public void onHold(CSIOEvents.OnHold onHold) {
         Logging.d(TAG, "onHold ");
         if (callstats != null) {
-            callstats.reportEvent(peerId, OnResume.INSTANCE);
+            callstats.reportEvent(peerId, OnHold.INSTANCE);
         }
     }
 
