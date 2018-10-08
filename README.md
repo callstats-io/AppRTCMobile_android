@@ -4,10 +4,10 @@ AppRTC demo application with Callstats.io android library integration
 
 ## Getting Started
 
-These instructions will help you run the apprtc android demo application with csio integration. See notes on how you will get
-callstarts library related credentials to run the application. 
+These instructions will help you run the apprtc android demo application with callstats integration. See notes on how you will get
+callstats library related credentials to run the application. 
 
-***Without the csio credentials the application will not run.***
+***Without the callstats credentials the application will not run.***
 
 ### Prerequisites
 
@@ -31,7 +31,7 @@ details of authentication related integration can be found [https://www.callstat
 - In the apprtc demo application give some room name ( for example csio-test-1234 ), and dial
 - Open browser, and try to join the same room from here - [https://appr.tc/](https://appr.tc/)
 - Watch your android logcat for sample events
-- Or Check your Callstats dashboard for given WebRTC sessions
+- Or Check your Callstats.io dashboard for given WebRTC sessions
 
 
 ### Events implemented in demo
@@ -48,5 +48,9 @@ details of authentication related integration can be found [https://www.callstat
     - [ x ] [Special Event - application log ](https://docs.callstats.io/restapi/#tag/special-events)
         - [ x ] Application specific log. Can be anything that you find should be important for your application
         - [ x ] Example - Toggle between front/rear camera, when user connected/disconnected/join/leave apprtc room, etc.
+        
+        
+### Integration
+- 
     
  
