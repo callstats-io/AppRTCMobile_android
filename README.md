@@ -22,7 +22,7 @@ callstarts library related credentials to run the application.
  
 ### Provide credentials
 
-- Get callstats application id, key id, and token. You can hardcoded the token, or use third party server to generate the token and authentication. 
+- Get callstats ``` application id, key id, and token ```. You can hardcoded the token, or use third party server to generate the token and authentication. 
 - Apply changes in ```CsioSHIM.java```
 
 ### Build and run the android application 
