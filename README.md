@@ -55,7 +55,7 @@ details of authentication related integration can be found [https://www.callstat
 1. Get [Callstats.io](https://www.callstats.io/) WebRTC analytic library for android from [https://github.com/callstats-io/callstats-android](https://github.com/callstats-io/callstats-android). It also includes the documentation 
 on how we can integrate the library with any WebRTC application along with an integration with callstats own demo application. 
 
-2. Include it in your gradle dependency. The apprtc demo is using ```0.1.1``` version. [implementation](../app/build.gradle#L30)
+2. Include it in your gradle dependency. The apprtc demo is using ```0.1.1``` version. [implementation](./app/build.gradle#L30)
 
     ```
         implementation "io.callstats:callstats:<version>"
