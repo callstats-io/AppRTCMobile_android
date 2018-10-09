@@ -96,6 +96,8 @@ on how we can integrate the library with any WebRTC application along with an in
 7. Initiate fabric setup event. After fabric setup is complete, we will be able to send data
 
     ```
+        // peerConnection - of type WebRTC peer connection
+        // peerId - of type string - application specifc identifier for this peer connection
         callstats.addNewFabric(peerConnection, peerId)
     ```
 
