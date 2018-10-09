@@ -60,7 +60,7 @@ on how we can integrate the library with any WebRTC application along with an in
     ```
         implementation "io.callstats:callstats:<version>"
     ```
-    ```$ =>  ```[Example](./app/build.gradle#L30)
+    ```$ ```[Example](./app/build.gradle#L30)
 
 3. Include Google WebRTC prebuild library from JCenter. [https://webrtc.org/native-code/android/](https://webrtc.org/native-code/android/). The apprtc demo is using ```1.0.25003``` version
 
