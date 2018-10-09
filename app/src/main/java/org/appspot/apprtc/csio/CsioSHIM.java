@@ -52,7 +52,7 @@ public class CsioSHIM {
         csioUtils = new CsioUtils();
     }
 
-    public void Initialize(String alias, Context context) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+    public void initialize(String alias, Context context) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
         if (alias == null) {
             throw new RuntimeException("DEVICE ID CANNOT BE NULL");
         }

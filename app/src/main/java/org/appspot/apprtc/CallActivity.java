@@ -307,11 +307,11 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
             return;
         }
 
-        // Initialize
+        // initialize
         csioSHIM = new CsioSHIM();
         // Start CSIO
         try {
-            csioSHIM.Initialize("android-apprtc-demo", getApplicationContext());
+            csioSHIM.initialize("android-apprtc-demo", getApplicationContext());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (NoSuchProviderException e) {
