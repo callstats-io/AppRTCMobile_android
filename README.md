@@ -52,53 +52,55 @@ details of authentication related integration can be found [https://www.callstat
         
 ### Integration process
 
-- Get [Callstats.io](https://www.callstats.io/) WebRTC analytic library for android from [https://github.com/callstats-io/callstats-android](https://github.com/callstats-io/callstats-android). It also includes the documentation 
+1. Get [Callstats.io](https://www.callstats.io/) WebRTC analytic library for android from [https://github.com/callstats-io/callstats-android](https://github.com/callstats-io/callstats-android). It also includes the documentation 
 on how we can integrate the library with any WebRTC application along with an integration with callstats own demo application. 
 
-- Include it in you gradle dependency. The apprtc demo is using ```0.1.1``` version.
+2. Include it in you gradle dependency. The apprtc demo is using ```0.1.1``` version.
 
-```
-    implementation "io.callstats:callstats:<version>"
-```
+    ```
+        implementation "io.callstats:callstats:<version>"
+    ```
 
-- Include Google WebRTC prebuild library from JCenter. [https://webrtc.org/native-code/android/](https://webrtc.org/native-code/android/). The apprtc demo is using ```1.0.25003``` version
+3. Include Google WebRTC prebuild library from JCenter. [https://webrtc.org/native-code/android/](https://webrtc.org/native-code/android/). The apprtc demo is using ```1.0.25003``` version
 
-```
-    implementation 'org.webrtc:google-webrtc:<version>'
-```
+    ```
+        implementation 'org.webrtc:google-webrtc:<version>'
+    ```
 
-- [ Optional ] Include [EventBus](https://github.com/greenrobot/EventBus). We are using ```3.1.1``` version
+4. [ Optional ] Include [EventBus](https://github.com/greenrobot/EventBus). We are using ```3.1.1``` version
 
-```
-    implementation 'org.greenrobot:eventbus:<version>'
-```
+    ```
+        implementation 'org.greenrobot:eventbus:<version>'
+    ```
 
-- Create Callstats object 
+5. Create Callstats object 
+    
+    ```
+        callstats = new Callstats(
+            context,
+            appID, // Application ID from Callstats
+            localID, // current user ID
+            deviceID, // unique device ID
+            jwt, // jwt from server for authentication
+            alias, // user alias
+            clientVersion, // user version
+            callstatsConfig) // Callstats config parameter 
+    ``` 
 
-```
-    callstats = new Callstats(
-        context,
-        appID, // Application ID from Callstats
-        localID, // current user ID
-        deviceID, // unique device ID
-        jwt, // jwt from server for authentication
-        alias, // user alias
-        clientVersion, // user version
-        callstatsConfig) // Callstats config parameter 
-``` 
+6. Start callstats session with a unique identifier. For appRTC session monitoring demo we are using appRTC room number as unique identifier
 
-- Start callstats session with a unique identifier. For appRTC session monitoring demo we are using appRTC room number as unique identifier
+    ```
+        callstats.startSession(room)
+    ```
 
-```
-    callstats.startSession(room)
-```
+7. Initiate fabric setup event. After fabric setup is complete, we will be able to send data
 
-- Initiate fabric setup event. After fabric setup is complete, we will be able to send data
-```
-    callstats.addNewFabric(fabricSetup.peerConnection, this.peerId)
-```
+    ```
+        callstats.addNewFabric(fabricSetup.peerConnection, this.peerId)
+    ```
 
-- Try to send some data to AppRTC session data. For example -
+8. Try to send some data to AppRTC session data. For example -
+  
     - WebRTC ICE Connection state change
         
         ```
@@ -144,9 +146,10 @@ on how we can integrate the library with any WebRTC application along with an in
             
         ```
 
-- When a AppRTC peer connection session ends, stop the session monitoring
-```
-    callstats.stopSession()
-```
+9. When a AppRTC peer connection session ends, stop the session monitoring
+
+    ```
+        callstats.stopSession()
+    ```
 
  
