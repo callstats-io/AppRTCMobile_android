@@ -96,7 +96,7 @@ on how we can integrate the library with any WebRTC application along with an in
 7. Initiate fabric setup event. After fabric setup is complete, we will be able to send data
 
     ```
-        callstats.addNewFabric(fabricSetup.peerConnection, this.peerId)
+        callstats.addNewFabric(peerConnection, peerId)
     ```
 
 8. Try to send some data to AppRTC session data. For example -
