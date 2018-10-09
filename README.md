@@ -174,7 +174,7 @@ on how we can integrate the library with any WebRTC application along with an in
 9. When a AppRTC peer connection session ends, stop the session monitoring
 
     ```
-        callstats.stopSession()
+    callstats.stopSession()
     ```
     ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L107)
 
