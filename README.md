@@ -67,12 +67,14 @@ on how we can integrate the library with any WebRTC application along with an in
     ```
         implementation 'org.webrtc:google-webrtc:<version>'
     ```
-
+    ```$ ```[Example](./app/build.gradle#L29)
+    
 4. [ Optional ] Include [EventBus](https://github.com/greenrobot/EventBus). We are using ```3.1.1``` version
 
     ```
         implementation 'org.greenrobot:eventbus:<version>'
     ```
+    ```$ ```[Example](./app/build.gradle#L34)
 
 5. Create Callstats object 
     
@@ -87,13 +89,15 @@ on how we can integrate the library with any WebRTC application along with an in
             clientVersion, // user version
             callstatsConfig) // Callstats config parameter 
     ``` 
+    ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L76)
 
 6. Start callstats session with a unique identifier. For appRTC session monitoring demo we are using appRTC room number as unique identifier
 
     ```
         callstats.startSession(room)
     ```
-
+    ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L95)
+    
 7. Initiate fabric setup event. After fabric setup is complete, we will be able to send data
 
     ```
@@ -101,7 +105,8 @@ on how we can integrate the library with any WebRTC application along with an in
         // peerId - of type string - application specifc identifier for this peer connection
         callstats.addNewFabric(peerConnection, peerId)
     ```
-
+    ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L136)
+    
 8. Try to send some data to AppRTC session data. For example -
   
     - WebRTC ICE Connection state change
@@ -109,37 +114,52 @@ on how we can integrate the library with any WebRTC application along with an in
         ```
         callstats.reportEvent(peerId, new OnIceConnectionChange(newState))
         ```
+        ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L144)
+        
     - WebRTC ICE gathering state change
     
         ```
         callstats.reportEvent(peerId, new OnIceGatheringChange(newState))
         ```
+        ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L152)
         
     - WebRTC Signaling state change 
         
         ```
         callstats.reportEvent(peerId, new OnSignalingChange(newState))
         ```
+        ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L160)
+        
     - On Add new stream 
         ```
         callstats.reportEvent(peerId, OnAddStream.INSTANCE);
         ```
+        ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L169)
+        
     - On audio mute, and unmute
         ```
         callstats.reportEvent(peerId, new OnAudio(isMuted, deviceId))
         ```
+        ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L180)
+        
     - On video play, and pause
         ```
         callstats.reportEvent(peerId, new OnVideo(isPaused, deviceId))
         ```
+        ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L188)
+        
     - On fabric hold
         ```
         callstats.reportEvent(peerId, OnHold.INSTANCE);
         ```
+        ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L204)
+        
     - On fabric resume
         ```
         callstats.reportEvent(peerId, OnResume.INSTANCE);
         ```
+        ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L196)
+        
     - To send custom message
         ```
         // message - of type string
@@ -148,11 +168,14 @@ on how we can integrate the library with any WebRTC application along with an in
         callstats.log(message, level, loggingType);
         
         ```
+        ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L212)
+       
 
 9. When a AppRTC peer connection session ends, stop the session monitoring
 
     ```
         callstats.stopSession()
     ```
+    ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L107)
 
  
