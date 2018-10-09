@@ -58,52 +58,52 @@ on how we can integrate the library with any WebRTC application along with an in
 2. Include it in your gradle dependency. The apprtc demo is using ```0.1.1``` version.
 
     ```
-        implementation "io.callstats:callstats:<version>"
+    implementation "io.callstats:callstats:<version>"
     ```
     ```$ ```[Example](./app/build.gradle#L30)
 
 3. Include Google WebRTC prebuild library from JCenter. [https://webrtc.org/native-code/android/](https://webrtc.org/native-code/android/). The apprtc demo is using ```1.0.25003``` version
 
     ```
-        implementation 'org.webrtc:google-webrtc:<version>'
+    implementation 'org.webrtc:google-webrtc:<version>'
     ```
     ```$ ```[Example](./app/build.gradle#L29)
     
 4. [ Optional ] Include [EventBus](https://github.com/greenrobot/EventBus). We are using ```3.1.1``` version
 
     ```
-        implementation 'org.greenrobot:eventbus:<version>'
+    implementation 'org.greenrobot:eventbus:<version>'
     ```
     ```$ ```[Example](./app/build.gradle#L34)
 
 5. Create Callstats object 
     
     ```
-        callstats = new Callstats(
-            context,
-            appID, // Application ID from Callstats
-            localID, // current user ID
-            deviceID, // unique device ID
-            jwt, // jwt from server for authentication
-            alias, // user alias
-            clientVersion, // user version
-            callstatsConfig) // Callstats config parameter 
+    callstats = new Callstats(
+        context,
+        appID, // Application ID from Callstats
+        localID, // current user ID
+        deviceID, // unique device ID
+        jwt, // jwt from server for authentication
+        alias, // user alias
+        clientVersion, // user version
+        callstatsConfig) // Callstats config parameter 
     ``` 
     ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L76)
 
 6. Start callstats session with a unique identifier. For appRTC session monitoring demo we are using appRTC room number as unique identifier
 
     ```
-        callstats.startSession(room)
+    callstats.startSession(room)
     ```
     ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L95)
     
 7. Initiate fabric setup event. After fabric setup is complete, we will be able to send data
 
     ```
-        // peerConnection - of type WebRTC peer connection
-        // peerId - of type string - application specifc identifier for this peer connection
-        callstats.addNewFabric(peerConnection, peerId)
+    // peerConnection - of type WebRTC peer connection
+    // peerId - of type string - application specifc identifier for this peer connection
+    callstats.addNewFabric(peerConnection, peerId)
     ```
     ```$ ```[Example](./app/src/main/java/org/appspot/apprtc/csio/CsioSHIM.java#L136)
     
