@@ -141,11 +141,11 @@ on how we can integrate the library with any WebRTC application along with an in
         ```
     - To send custom message
         ```
-            // message - of type string
-            // level - of type io.callstats.LoggingLevel
-            // loggingType - of type io.callstats.LoggingType
-            callstats.log(message, level, loggingType);
-            
+        // message - of type string
+        // level - of type io.callstats.LoggingLevel
+        // loggingType - of type io.callstats.LoggingType
+        callstats.log(message, level, loggingType);
+        
         ```
 
 9. When a AppRTC peer connection session ends, stop the session monitoring
