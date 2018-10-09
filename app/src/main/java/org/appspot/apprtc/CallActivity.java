@@ -320,7 +320,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
             e.printStackTrace();
         }
         if (csioSHIM != null) {
-            csioSHIM.StartSession(roomId);
+            csioSHIM.startSession(roomId);
         }
 
         boolean loopback = intent.getBooleanExtra(EXTRA_LOOPBACK, false);
@@ -545,7 +545,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     @Override
     protected void onDestroy() {
         if (csioSHIM != null) {
-            csioSHIM.Dispose();
+            csioSHIM.dispose();
         }
         Thread.setDefaultUncaughtExceptionHandler(null);
         disconnect();

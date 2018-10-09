@@ -84,7 +84,7 @@ public class CsioSHIM {
                 callstatsConfig);
     }
 
-    public void StartSession(String roomId) {
+    public void startSession(String roomId) {
         if (roomId == null) {
             throw new RuntimeException("ROOM, OR CONFERENCE ID CANNOT BE NULL");
         }
@@ -95,7 +95,7 @@ public class CsioSHIM {
         callstats.startSession(roomId);
     }
 
-    public void Dispose() {
+    public void dispose() {
         try {
             EventBus.getDefault().unregister(this);
         } catch (Exception err) {
